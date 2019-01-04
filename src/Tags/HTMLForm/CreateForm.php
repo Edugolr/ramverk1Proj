@@ -1,12 +1,10 @@
 <?php
 
-namespace Chai17\Questions\HTMLForm;
+namespace Chai17\Tags\HTMLForm;
 
 use Anax\HTMLForm\FormModel;
 use Psr\Container\ContainerInterface;
-use Chai17\Questions\Questions;
 use Chai17\Tags\Tags;
-use Chai17\User\User;
 
 /**
  * Form to create an item.
@@ -27,17 +25,7 @@ class CreateForm extends FormModel
                 "legend" => "Details of the item",
             ],
             [
-                "title" => [
-                    "type" => "text",
-                    "validation" => ["not_empty"],
-                ],
-
-                "question" => [
-                    "type" => "textarea",
-                    "validation" => ["not_empty"],
-                ],
-
-                "tags" => [
+                "tag" => [
                     "type" => "text",
                     "validation" => ["not_empty"],
                 ],
@@ -61,34 +49,10 @@ class CreateForm extends FormModel
      */
     public function callbackSubmit() : bool
     {
-        $questions = new Questions();
-        $user = new User();
-        $user->setDb($this->di->get("dbqb"));
-        $questions->setDb($this->di->get("dbqb"));
-        $questions->title  = $this->form->value("title");
-        $questions->tags  = $this->form->value("tags");
-        $questions->userID  = $this->di->session->get("userID");
-        $questions->question = $this->form->value("question");
-        $test = explode(" ", $this->form->value("tags"));
-        foreach ($test as $test) {
-            $tags = new Tags();
-            $tags->setDb($this->di->get("dbqb"));
-            $tags->find("tag", $test);
-            if (!$tags->tag == $test) {
-                $tags->tag = $test;
-                $tags->counter = 1;
-                $tags->save();
-            } else {
-                $tags->tag = $test;
-                $tags->counter = $tags->counter + 1;
-                $tags->save();
-            }
-
-        }
-        $user->findById($questions->userID);
-        $user->counter = $user->counter + 1;
-        $questions->save();
-        $user->save();
+        $tag = new Tags();
+        $tag->setDb($this->di->get("dbqb"));
+        $tag->tag  = $this->form->value("tag");
+        $tag->save();
         return true;
     }
 
@@ -101,7 +65,7 @@ class CreateForm extends FormModel
      */
     public function callbackSuccess()
     {
-        $this->di->get("response")->redirect("questions")->send();
+        $this->di->get("response")->redirect("tags")->send();
     }
 
 

@@ -22,5 +22,5 @@ CREATE TABLE Questions (
     `userID` INTEGER NOT NULL,
     `tags` VARCHAR(256) NOT NULL,
     `question` TEXT NOT NULL,
-    `created` DATETIME
+    `created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE INNODB CHARACTER SET utf8 COLLATE utf8_swedish_ci;

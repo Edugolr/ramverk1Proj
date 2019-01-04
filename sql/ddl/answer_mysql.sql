@@ -25,5 +25,5 @@ CREATE TABLE Answer (
     `downvote` INTEGER,
     `answer` TEXT NOT NULL,
     `solution` BOOLEAN DEFAULT 0,
-    `created` DATETIME
+    `created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE INNODB CHARACTER SET utf8 COLLATE utf8_swedish_ci;

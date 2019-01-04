@@ -27,6 +27,7 @@ class User extends ActiveRecordModel
     public $updated;
     public $deleted;
     public $active;
+    public $counter;
     public $firstname;
     public $lastname;
     /**

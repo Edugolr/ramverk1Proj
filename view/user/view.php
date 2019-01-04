@@ -17,8 +17,23 @@ $user = isset($user) ? $user : null;
         <p><b>Email/användarnamn:</b> <?= $di->session->get("user") ?></p>
     </div>
     <div class="grid-item">
-        <p>egna trådar</p>
-        <p>kommentarer</p>
+        <?php  $userQuestions = $questions->findAllWhere("userID = ?", $user->id) ?>
+        <?php $userAnswers = $answers->findAllWhere("userID = ?", $user->id) ?>
+        <?php $userComments = $comments->findAllWhere("userID = ?", $user->id) ?>
+        <h1>frågor  <?= count($userQuestions) ?></h1>
+        <?php foreach ($userQuestions as $userQuestions): ?>
+            <p><a href="<?= url("questions/view/{$userQuestions->id}"); ?>"><?=  $userQuestions->title ?></a></p>
+        <?php endforeach; ?>
+        <h1>svar <?= count($userAnswers) ?></h1>
+        <?php foreach ($userAnswers as $userAnswers): ?>
+            <p><a href="<?= url("questions/view/{$userAnswers->questionID}"); ?>"><?=  $userAnswers->answer ?></a></p>
+
+        <?php endforeach; ?>
+        <h1>kommentarer <?= count($userComments) ?></h1>
+        <?php foreach ($userComments as $userComments): ?>
+            <?php $link = $userComments->questionID ?: $userComments->answerID; ?>
+            <p><a href="<?= url("questions/view/{$link}"); ?>"><?= $userComments->comment ?></a></p>
+        <?php endforeach; ?>
     </div>
 
 </div>

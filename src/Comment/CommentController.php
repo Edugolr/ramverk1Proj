@@ -1,17 +1,13 @@
 <?php
 
-namespace Chai17\Questions;
+namespace Chai17\Comment;
 
 use Anax\Commons\ContainerInjectableInterface;
 use Anax\Commons\ContainerInjectableTrait;
-use Chai17\Questions\HTMLForm\CreateForm;
-use Chai17\Questions\HTMLForm\EditForm;
-use Chai17\Questions\HTMLForm\DeleteForm;
-use Chai17\Questions\HTMLForm\UpdateForm;
-use Chai17\Answer\Answer;
-use Chai17\User\User;
-use Chai17\Comment\Comment;
-
+use Chai17\Comment\HTMLForm\CreateForm;
+use Chai17\Comment\HTMLForm\EditForm;
+use Chai17\Comment\HTMLForm\DeleteForm;
+use Chai17\Comment\HTMLForm\UpdateForm;
 
 // use Anax\Route\Exception\ForbiddenException;
 // use Anax\Route\Exception\NotFoundException;
@@ -20,7 +16,7 @@ use Chai17\Comment\Comment;
 /**
  * A sample controller to show how a controller class can be implemented.
  */
-class QuestionsController implements ContainerInjectableInterface
+class CommentController implements ContainerInjectableInterface
 {
     use ContainerInjectableTrait;
 
@@ -45,6 +41,8 @@ class QuestionsController implements ContainerInjectableInterface
     //     ;
     // }
 
+
+
     /**
      * Show all items.
      *
@@ -53,14 +51,11 @@ class QuestionsController implements ContainerInjectableInterface
     public function indexActionGet() : object
     {
         $page = $this->di->get("page");
-        $questions = new Questions();
-        $answers = new Answer();
-        $answers->setDb($this->di->get("dbqb"));
-        $questions->setDb($this->di->get("dbqb"));
-        $page->add("questions/crud/view-all", [
-            "questions" => $questions->findAll(),
-            "answers" => $answers
+        $comment = new Comment();
+        $comment->setDb($this->di->get("dbqb"));
 
+        $page->add("comment/crud/view-all", [
+            "items" => $comment->findAll(),
         ]);
 
         return $page->render([
@@ -75,13 +70,13 @@ class QuestionsController implements ContainerInjectableInterface
      *
      * @return object as a response object
      */
-    public function createAction() : object
+    public function createAction(int $questionID, $type) : object
     {
         $page = $this->di->get("page");
-        $form = new CreateForm($this->di);
+        $form = new CreateForm($this->di, $questionID, $type);
         $form->check();
 
-        $page->add("questions/crud/create", [
+        $page->add("comment/crud/create", [
             "form" => $form->getHTML(),
         ]);
 
@@ -103,7 +98,7 @@ class QuestionsController implements ContainerInjectableInterface
         $form = new DeleteForm($this->di);
         $form->check();
 
-        $page->add("questions/crud/delete", [
+        $page->add("comment/crud/delete", [
             "form" => $form->getHTML(),
         ]);
 
@@ -127,39 +122,12 @@ class QuestionsController implements ContainerInjectableInterface
         $form = new UpdateForm($this->di, $id);
         $form->check();
 
-        $page->add("questions/crud/update", [
+        $page->add("comment/crud/update", [
             "form" => $form->getHTML(),
         ]);
 
         return $page->render([
             "title" => "Update an item",
-        ]);
-    }
-
-    public function viewAction(int $id) : object
-    {
-        $page = $this->di->get("page");
-        $question = new Questions();
-        $answers = new Answer();
-        $user = new User();
-        $comment = new Comment();
-        $question->setDb($this->di->get("dbqb"));
-        $user->setDb($this->di->get("dbqb"));
-        $answers->setDb($this->di->get("dbqb"));
-        $comment->setDb($this->di->get("dbqb"));
-        $question->find("id", $id);
-        $user->find("id", $question->userID);
-        $answers = $answers->findAllWhere("questionID = ?", $question->id);
-        $page->add("questions/crud/view", [
-            "question" => $question,
-            "answers" => $answers,
-            "user" => $user,
-            "questionComment" => $comment->findAllWhere("questionID = ?", $question->id),
-            "comment" => $comment,
-        ]);
-
-        return $page->render([
-            "title" => "A collection of items",
         ]);
     }
 }

@@ -21,7 +21,7 @@ return [
         ],
         [
             "text" => "Taggar",
-            "url" => "taggar",
+            "url" => "tags",
             "title" => "Taggar",
         ],
         [

@@ -7,6 +7,9 @@ use Anax\Commons\ContainerInjectableTrait;
 use Chai17\User\HTMLForm\UserLoginForm;
 use Chai17\User\HTMLForm\CreateUserForm;
 use Chai17\User\HTMLForm\UpdateUserForm;
+use Chai17\Answer\Answer as Answer;
+use Chai17\Questions\Questions as Questions;
+use Chai17\Comment\Comment as Comment;
 
 // use Anax\Route\Exception\ForbiddenException;
 // use Anax\Route\Exception\NotFoundException;
@@ -157,13 +160,23 @@ class UserController implements ContainerInjectableInterface
         $page = $this->di->get("page");
         $user = new User();
         $user->setDb($this->di->get("dbqb"));
-         $user->findById($id);
+        $user->findById($id);
+        $questions = new Questions;
+        $questions->setDb($this->di->get("dbqb"));
+        $answers = new Answer;
+        $answers->setDb($this->di->get("dbqb"));
+        $comments = new Comment;
+        $comments->setDb($this->di->get("dbqb"));
         $page->add("user/view", [
             "user" => $user,
+            "questions" => $questions,
+            "answers" => $answers,
+            "comments" => $comments,
         ]);
 
         return $page->render([
             "title" => "A collection of items",
+
         ]);
     }
 

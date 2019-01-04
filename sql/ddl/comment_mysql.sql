@@ -13,18 +13,15 @@ SET NAMES utf8;
 
 
 --
--- Table User
+-- Table Comment
 --
-DROP TABLE IF EXISTS User;
-CREATE TABLE User (
+DROP TABLE IF EXISTS Comment;
+CREATE TABLE Comment (
     `id` INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    `email` VARCHAR(255) UNIQUE NOT NULL,
-    `acronym` VARCHAR(10) UNIQUE NOT NULL,
-    `password` VARCHAR(128) NOT NULL,
-    `firstname`VARCHAR(50),
-    `lastname` VARCHAR(50),
+    `username`  VARCHAR(10) NOT NULL,
+    `userID`  VARCHAR(10) NOT NULL,
+    `questionID` INTEGER,
+    `answerID` INTEGER,
+    `comment` TEXT NOT NULL,
     `created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    `updated` DATETIME,
-    `deleted` DATETIME,
-    `active` DATETIME
 ) ENGINE INNODB CHARACTER SET utf8 COLLATE utf8_swedish_ci;

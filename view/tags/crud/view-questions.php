@@ -28,18 +28,6 @@ $urlToRegister = url("user/create");
     <img class="round" alt="" src="https://www.gravatar.com/avatar/<?=md5(strtolower(trim($di->session->get("user"))));?>"/>
     <?php endif; ?>
 </div>
-<?php if (empty($di->session->get("login"))): ?>
-    <p>
-        <p>Du måste vara inloggad för att kunna skapa nya frågor</p>
-        <a href="<?= $urlToLogin ?>">Logga in</a> |
-        <a href="<?= $urlToRegister ?>">Registrera</a>
-    </p>
-    <hr>
-<?php else: ?>
-    <p>
-        <button type="button" name="button" onclick="window.location.href = '<?= $urlToCreate ?>';">Ny fråga</button>
-    </p>
-<?php endif; ?>
 <?php foreach ($questions as $question) : ?>
     <?php $answer = $answers->findAllWhere("questionID = ?", $question->id); ?>
     <div style="max-width:98%" class="card question grid-container">

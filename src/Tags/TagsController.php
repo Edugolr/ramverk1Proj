@@ -1,17 +1,15 @@
 <?php
 
-namespace Chai17\Questions;
+namespace Chai17\Tags;
 
 use Anax\Commons\ContainerInjectableInterface;
 use Anax\Commons\ContainerInjectableTrait;
-use Chai17\Questions\HTMLForm\CreateForm;
-use Chai17\Questions\HTMLForm\EditForm;
-use Chai17\Questions\HTMLForm\DeleteForm;
-use Chai17\Questions\HTMLForm\UpdateForm;
+use Chai17\Tags\HTMLForm\CreateForm;
+use Chai17\Tags\HTMLForm\EditForm;
+use Chai17\Tags\HTMLForm\DeleteForm;
+use Chai17\Tags\HTMLForm\UpdateForm;
+use Chai17\Questions\Questions;
 use Chai17\Answer\Answer;
-use Chai17\User\User;
-use Chai17\Comment\Comment;
-
 
 // use Anax\Route\Exception\ForbiddenException;
 // use Anax\Route\Exception\NotFoundException;
@@ -20,7 +18,7 @@ use Chai17\Comment\Comment;
 /**
  * A sample controller to show how a controller class can be implemented.
  */
-class QuestionsController implements ContainerInjectableInterface
+class TagsController implements ContainerInjectableInterface
 {
     use ContainerInjectableTrait;
 
@@ -45,22 +43,21 @@ class QuestionsController implements ContainerInjectableInterface
     //     ;
     // }
 
+
+
     /**
      * Show all items.
      *
      * @return object as a response object
      */
-    public function indexActionGet() : object
+    public function indexAction() : object
     {
         $page = $this->di->get("page");
-        $questions = new Questions();
-        $answers = new Answer();
-        $answers->setDb($this->di->get("dbqb"));
-        $questions->setDb($this->di->get("dbqb"));
-        $page->add("questions/crud/view-all", [
-            "questions" => $questions->findAll(),
-            "answers" => $answers
+        $tag = new Tags();
+        $tag->setDb($this->di->get("dbqb"));
 
+        $page->add("tags/crud/view-all", [
+            "tags" => $tag->findAll(),
         ]);
 
         return $page->render([
@@ -81,7 +78,7 @@ class QuestionsController implements ContainerInjectableInterface
         $form = new CreateForm($this->di);
         $form->check();
 
-        $page->add("questions/crud/create", [
+        $page->add("tags/crud/create", [
             "form" => $form->getHTML(),
         ]);
 
@@ -103,7 +100,7 @@ class QuestionsController implements ContainerInjectableInterface
         $form = new DeleteForm($this->di);
         $form->check();
 
-        $page->add("questions/crud/delete", [
+        $page->add("tags/crud/delete", [
             "form" => $form->getHTML(),
         ]);
 
@@ -127,7 +124,7 @@ class QuestionsController implements ContainerInjectableInterface
         $form = new UpdateForm($this->di, $id);
         $form->check();
 
-        $page->add("questions/crud/update", [
+        $page->add("tags/crud/update", [
             "form" => $form->getHTML(),
         ]);
 
@@ -136,30 +133,21 @@ class QuestionsController implements ContainerInjectableInterface
         ]);
     }
 
-    public function viewAction(int $id) : object
+    public function questionsAction($id) : object
     {
         $page = $this->di->get("page");
         $question = new Questions();
-        $answers = new Answer();
-        $user = new User();
-        $comment = new Comment();
         $question->setDb($this->di->get("dbqb"));
-        $user->setDb($this->di->get("dbqb"));
+        $answers = new Answer();
         $answers->setDb($this->di->get("dbqb"));
-        $comment->setDb($this->di->get("dbqb"));
-        $question->find("id", $id);
-        $user->find("id", $question->userID);
-        $answers = $answers->findAllWhere("questionID = ?", $question->id);
-        $page->add("questions/crud/view", [
-            "question" => $question,
+
+        $page->add("tags/crud/view-questions", [
+            "questions" => $question->findAllWhere("tags LIKE ?", "%$id%"),
             "answers" => $answers,
-            "user" => $user,
-            "questionComment" => $comment->findAllWhere("questionID = ?", $question->id),
-            "comment" => $comment,
         ]);
 
         return $page->render([
-            "title" => "A collection of items",
+            "title" => "frågor kopplade till tag",
         ]);
     }
 }

@@ -67,7 +67,7 @@ class UserLoginForm extends FormModel
 
          if (!$res) {
             $this->form->rememberValues();
-            $this->form->addOutput("User or password did not match.". $password. $email);
+            $this->form->addOutput("User or password did not match.");
             return false;
          }
          $session = $this->di->get("session");
