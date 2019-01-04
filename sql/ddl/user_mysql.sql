@@ -23,7 +23,8 @@ CREATE TABLE User (
     `password` VARCHAR(128) NOT NULL,
     `firstname`VARCHAR(50),
     `lastname` VARCHAR(50),
-    `created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    `created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `counter` INTEGER,
     `updated` DATETIME,
     `deleted` DATETIME,
     `active` DATETIME
