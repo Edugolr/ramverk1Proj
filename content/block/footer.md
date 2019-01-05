@@ -1,1 +1,4 @@
-Copyright år och ditt namn samt diverse länkar som du finner relevanta.
+```
+ .  
+..:  Copyright (c) 2018 Christofer Wikman (christofer.wikman@gmail.com)
+```

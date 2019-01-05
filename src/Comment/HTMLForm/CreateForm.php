@@ -48,7 +48,7 @@ class CreateForm extends FormModel
 
                 "submit" => [
                     "type" => "submit",
-                    "value" => "Create item",
+                    "value" => "Publicera kommentar",
                     "callback" => [$this, "callbackSubmit"]
                 ],
             ]

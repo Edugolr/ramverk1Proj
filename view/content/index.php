@@ -9,7 +9,7 @@ $filter = new \Anax\TextFilter\TextFilter;
     <img class="round" alt="" src="https://www.gravatar.com/avatar/<?=md5(strtolower(trim($di->session->get("user"))));?>"/>
 </div>
 
-<h1>senaste frågorna</h1>
+<h1>Senaste frågorna</h1>
 <?php foreach ($questions as $question) : ?>
     <?php $answer = $answers->findAllWhere("questionID = ?", $question->id); ?>
     <div style="max-width:98%" class="card question grid-container-question">
@@ -19,7 +19,7 @@ $filter = new \Anax\TextFilter\TextFilter;
         </div>
         <div class="grid-item question">
             <a href="<?= url("questions/view/{$question->id}"); ?>">
-            <p><?= $question->title ?></p>
+            <h1><?= $question->title ?></h1>
             </a>
             <p><?= $filter->doFilter($question->question, ["markdown"]); ?></p>
             <ul class="tags">
@@ -32,7 +32,7 @@ $filter = new \Anax\TextFilter\TextFilter;
         </div>
     </div>
 <?php endforeach; ?>
-<h1>mest populära taggar</h1>
+<h1>Populära taggar</h1>
 <ul class="tags">
 <?php foreach ($tags as $tag): ?>
     <?php $link=htmlentities($tag->tag) ?>
@@ -40,7 +40,7 @@ $filter = new \Anax\TextFilter\TextFilter;
 <?php endforeach; ?>
 </ul>
 
-<h1>mest aktiva användare</h1>
+<h1>Mest aktiva användare</h1>
 
 <div class="grid-container">
 <?php foreach ($users as $user) : ?>

@@ -30,14 +30,14 @@ $urlToRegister = url("user/create");
 </div>
 <?php foreach ($questions as $question) : ?>
     <?php $answer = $answers->findAllWhere("questionID = ?", $question->id); ?>
-    <div style="max-width:98%" class="card question grid-container">
+    <div style="max-width:98%" class="card question grid-container-question">
         <div class="grid-item rank">
             <p>Antal svar</p>
             <p><?= count($answer) ?></p>
         </div>
         <div class="grid-item question">
             <a href="<?= url("questions/view/{$question->id}"); ?>">
-            <p><?= $question->title ?></p>
+            <h1><?= $question->title ?></h1>
             </a>
             <p><?= $filter->doFilter($question->question, ["markdown"]); ?></p>
             <ul class="tags">

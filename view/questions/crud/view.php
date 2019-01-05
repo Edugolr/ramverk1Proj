@@ -16,7 +16,7 @@ $urlToComment = url("comment/create")
     <img class="round" alt="" src="https://www.gravatar.com/avatar/<?=md5(strtolower(trim($di->session->get("user"))));?>"/>
     <?php endif; ?>
 </div>
-<h1>Fråga</h1>
+
 <div style="max-width:98%" class="card">
     <div class="title">
         <h1><?= $question->title ?></h1>
@@ -24,7 +24,11 @@ $urlToComment = url("comment/create")
     <div class="question">
         <p><?= $filter->doFilter($question->question, ["markdown"]); ?></p>
         <p class="author"><a href="<?= url("user/view/{$user->id}"); ?>"><?= $user->acronym?></a></p>
-    </div>
+
+
+
+
+
     <?php if (empty($di->session->get("login"))): ?>
         <p>
             <p>Du måste vara inloggad för att kunna svara eller kommentera på frågor</p>
@@ -36,19 +40,17 @@ $urlToComment = url("comment/create")
         <p><button type="button" name="button" onclick="window.location.href = '<?=$urlToAnswer."/".$question->id?>';">Svara</button></p>
         <p><button type="button" name="button" onclick="window.location.href = '<?=$urlToComment."/".$question->id. "/". "questionID"?>';">Kommentera</button></p>
     <?php endif; ?>
-</div>
-
-
-<h1>Kommentarer</h1>
-<?php foreach ($questionComment as $questionComment): ?>
-    <div style="max-width:80%" class="card">
-        <div class="questionComment">
+    <?php foreach ($questionComment as $questionComment): ?>
+        <div  class="comments">
             <p><?= $filter->doFilter($questionComment->comment, ["markdown"]); ?></p>
             <p><a href="<?= url("user/view/{$questionComment->userID}"); ?>">användare: <?= $questionComment->username ?></a></p>
         </div>
+        <hr style="clear:both;">
+    <?php endforeach; ?>
     </div>
-<?php endforeach; ?>
-<h1>Svar</h1>
+</div>
+
+<h1 style = "clear:both;">Svar</h1>
 <?php foreach ($answers as $answer): ?>
 <div style="max-width:90%" class="card">
     <div class="answer">
@@ -56,13 +58,16 @@ $urlToComment = url("comment/create")
         <p><a href="<?= url("user/view/{$answer->userID}"); ?>">användare: <?= $answer->username ?></a></p>
         <p><button type="button" name="button" onclick="window.location.href = '<?=$urlToComment."/".$answer->id. "/". "answerID"?>';">Kommentera</button></p>
         <?php  $comments = $comment->findAllWhere("answerID = ?", $answer->id) ?>
-        <div class="answerComments">
+        <div class="comments">
             <?php foreach ($comments as $comments): ?>
                 <p><?= $filter->doFilter($comments->comment, ["markdown"]); ?></p>
                 <p><a href="<?= url("user/view/{$comments->userID}"); ?>">användare: <?= $comments->username ?></a></p>
+                <hr style="clear:both;">
             <?php endforeach; ?>
         </div>
-
     </div>
+
+
+
 </div>
 <?php endforeach; ?>

@@ -70,6 +70,14 @@
 .tag:hover::after {
    border-left-color: crimson;
 }
+
+.comments {
+    background: #e0e0e0;
+    float: right;
+    max-width: 50%;
+    min-width: 90%;
+}
+
 button {
   border: none;
   outline: 0;

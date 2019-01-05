@@ -48,7 +48,7 @@ $urlToRegister = url("user/create");
         </div>
         <div class="grid-item question">
             <a href="<?= url("questions/view/{$question->id}"); ?>">
-            <p><?= $question->title ?></p>
+            <h1><?= $question->title ?></h1>
             </a>
             <p><?= $filter->doFilter($question->question, ["markdown"]); ?></p>
             <ul class="tags">
