@@ -40,7 +40,7 @@ return [
     "username"        => "user",
     "password"        => "pass",
     "driver_options"  => [
-        \PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'UTF8'"
+        \PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8mb4'"
     ],
     "fetch_mode"      => \PDO::FETCH_OBJ,
     "table_prefix"    => null,

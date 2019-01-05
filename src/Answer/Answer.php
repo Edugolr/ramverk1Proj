@@ -27,5 +27,4 @@ class Answer extends ActiveRecordModel
     public $created;
     public $solution;
     public $answer;
-
 }

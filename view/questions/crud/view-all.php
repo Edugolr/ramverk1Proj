@@ -1,6 +1,7 @@
 <?php
 
 namespace Anax\View;
+
 $filter = new \Anax\TextFilter\TextFilter;
 /**
  * View to display all books.
@@ -17,8 +18,6 @@ $urlToCreate = url("questions/create");
 $urlToDelete = url("questions/delete");
 $urlToLogin = url("user/login");
 $urlToRegister = url("user/create");
-
-
 
 ?>
 
@@ -42,7 +41,7 @@ $urlToRegister = url("user/create");
 <?php endif; ?>
 <?php foreach ($questions as $question) : ?>
     <?php $answer = $answers->findAllWhere("questionID = ?", $question->id); ?>
-    <div style="max-width:98%" class="card question grid-container">
+    <div style="max-width:98%" class="card question grid-container-question">
         <div class="grid-item rank">
             <p>Antal svar</p>
             <p><?= count($answer) ?></p>
@@ -55,7 +54,8 @@ $urlToRegister = url("user/create");
             <ul class="tags">
                 <?php $tags = explode(" ", $question->tags); ?>
                 <?php foreach ($tags as $tag) : ?>
-                     <li><a href=<?= url("tags/questions/{$tag}") ?> class="tag"><?= $tag ?></a></li>
+                    <?php $link=htmlentities($tag) ?>
+                     <li><a href=<?= url("tags/questions/{$link}") ?> class="tag"><?= $tag?></a></li>
                 <?php endforeach; ?>
             </ul>
         </div>

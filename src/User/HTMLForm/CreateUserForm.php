@@ -19,8 +19,7 @@ class CreateUserForm extends FormModel
     public function __construct(ContainerInterface $di)
     {
         parent::__construct($di);
-        $this->form->create
-        (
+        $this->form->create(
             [
                 "id" => __CLASS__,
                 "legend" => "Create user",
@@ -70,8 +69,8 @@ class CreateUserForm extends FormModel
      *
      * @return boolean true if okey, false if something went wrong.
      */
-     public function callbackSubmit()
-     {
+    public function callbackSubmit()
+    {
          // Get values from the submitted form
         $email          = $this->form->value("email");
         $acronym        = $this->form->value("acronym");
@@ -80,27 +79,37 @@ class CreateUserForm extends FormModel
         $password       = $this->form->value("password");
         $passwordAgain  = $this->form->value("password-again");
 
-         // Check password matches
-         if ($password !== $passwordAgain ) {
-             $this->form->rememberValues();
-             $this->form->addOutput("Password did not match.");
-             return false;
-         }
+        // Check password matches
+        if ($password !== $passwordAgain) {
+            $this->form->rememberValues();
+            $this->form->addOutput("Password did not match.");
+            return false;
+        }
 
          $user = new User();
          $user->setDb($this->di->get("dbqb"));
-         if (!$user->verifyEmail($email)) {
+        if (!$user->verifyEmail($email)) {
              $this->form->rememberValues();
              $this->form->addOutput("User allready exists");
              return false;
-         }
-         $user->email = $email;
-         $user->firstname = $firstname;
-         $user->acronym = $acronym;
-         $user->lastname = $lastname;
-         $user->setPassword($password);
-         $user->save();
-         $this->form->addOutput("User created");
-         return true;
+        }
+        $user->email = $email;
+        $user->firstname = $firstname;
+        $user->acronym = $acronym;
+        $user->lastname = $lastname;
+        $user->setPassword($password);
+        $user->save();
+        $this->form->addOutput("User created");
+        return true;
+    }
+
+    /**
+     * Callback what to do if the form was successfully submitted, this
+     * happen when the submit callback method returns true. This method
+     * can/should be implemented by the subclass for a different behaviour.
+     */
+    public function callbackSuccess()
+    {
+        $this->di->get("response")->redirect("user/login")->send();
     }
 }

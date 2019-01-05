@@ -62,8 +62,18 @@ class UserController implements ContainerInjectableInterface
         $user = new User();
         $user->setDb($this->di->get("dbqb"));
         $user->find("email", $session->get("user"));
+        $questions = new Questions;
+        $questions->setDb($this->di->get("dbqb"));
+        $answers = new Answer;
+        $answers->setDb($this->di->get("dbqb"));
+        $comments = new Comment;
+        $comments->setDb($this->di->get("dbqb"));
+
         $page->add("user/index", [
             "user" => $user,
+            "questions" => $questions,
+            "answers" => $answers,
+            "comments" => $comments,
         ]);
 
         return $page->render([
@@ -194,5 +204,4 @@ class UserController implements ContainerInjectableInterface
             "title" => "Update an item",
         ]);
     }
-
 }

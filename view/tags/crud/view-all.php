@@ -28,6 +28,7 @@ endif;
 ?>
 <ul class="tags">
     <?php foreach ($tags as $tag) : ?>
-         <li><a href=<?= url("tags/questions/{$tag->tag}") ?> class="tag"><?= $tag->tag ?></a></li>
+        <?php $link=htmlentities($tag->tag) ?>
+         <li><a href=<?= url("tags/questions/{$link}") ?> class="tag"><?= $tag->tag ?></a></li>
     <?php endforeach; ?>
 </ul>

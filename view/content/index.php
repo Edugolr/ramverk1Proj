@@ -4,12 +4,15 @@ namespace Anax\View;
 
 $filter = new \Anax\TextFilter\TextFilter;
 ?>
-
+<div class='hr'>
+    <hr>
+    <img class="round" alt="" src="https://www.gravatar.com/avatar/<?=md5(strtolower(trim($di->session->get("user"))));?>"/>
+</div>
 
 <h1>senaste frågorna</h1>
 <?php foreach ($questions as $question) : ?>
     <?php $answer = $answers->findAllWhere("questionID = ?", $question->id); ?>
-    <div style="max-width:98%" class="card question grid-container">
+    <div style="max-width:98%" class="card question grid-container-question">
         <div class="grid-item rank">
             <p>Antal svar</p>
             <p><?= count($answer) ?></p>
@@ -20,9 +23,10 @@ $filter = new \Anax\TextFilter\TextFilter;
             </a>
             <p><?= $filter->doFilter($question->question, ["markdown"]); ?></p>
             <ul class="tags">
-                <?php $tags = explode(" ", $question->tags); ?>
-                <?php foreach ($tags as $tag) : ?>
-                     <li><a href=<?= url("tags/questions/{$tag}") ?> class="tag"><?= $tag ?></a></li>
+                <?php $tagsQuestion = explode(" ", $question->tags); ?>
+                <?php foreach ($tagsQuestion as $tag) : ?>
+                    <?php $link=htmlentities($tag) ?>
+                     <li><a href=<?= url("tags/questions/{$link}") ?> class="tag"><?= $tag ?></a></li>
                 <?php endforeach; ?>
             </ul>
         </div>
@@ -31,7 +35,8 @@ $filter = new \Anax\TextFilter\TextFilter;
 <h1>mest populära taggar</h1>
 <ul class="tags">
 <?php foreach ($tags as $tag): ?>
-    <li><a href=<?= url("tags/questions/{$tag}") ?> class="tag"><?= $tag ?></a></li>
+    <?php $link=htmlentities($tag->tag) ?>
+    <li><a href=<?= url("tags/questions/{$link}") ?> class="tag"><?= $tag->tag ?></a></li>
 <?php endforeach; ?>
 </ul>
 

@@ -55,27 +55,37 @@ class UserLoginForm extends FormModel
      *
      * @return boolean true if okey, false if something went wrong.
      */
-     public function callbackSubmit()
+    public function callbackSubmit()
     {
-         // Get values from the submitted form
-         $email       = $this->form->value("user");
-         $password      = $this->form->value("password");
+        // Get values from the submitted form
+        $email       = $this->form->value("user");
+        $password      = $this->form->value("password");
 
-         $user = new User();
-         $user->setDb($this->di->get("dbqb"));
-         $res = $user->verifyPassword($email, $password);
+        $user = new User();
+        $user->setDb($this->di->get("dbqb"));
+        $res = $user->verifyPassword($email, $password);
 
-         if (!$res) {
+        if (!$res) {
             $this->form->rememberValues();
             $this->form->addOutput("User or password did not match.");
             return false;
-         }
-         $session = $this->di->get("session");
-         $session->set("login", true);
-         $session->set("user", $email);
-         $session->set("userID", $user->id);
-         $session->set("username", $user->acronym);
-         $this->form->addOutput("User " . $user->email . " logged in.");
-         return true;
+        }
+        $session = $this->di->get("session");
+        $session->set("login", true);
+        $session->set("user", $email);
+        $session->set("userID", $user->id);
+        $session->set("username", $user->acronym);
+        $this->form->addOutput("User " . $user->email . " logged in.");
+        return true;
+    }
+
+    /**
+     * Callback what to do if the form was successfully submitted, this
+     * happen when the submit callback method returns true. This method
+     * can/should be implemented by the subclass for a different behaviour.
+     */
+    public function callbackSuccess()
+    {
+        $this->di->get("response")->redirect("user")->send();
     }
 }

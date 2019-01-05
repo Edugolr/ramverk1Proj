@@ -26,5 +26,4 @@ class Comment extends ActiveRecordModel
     public $answerID;
     public $comment;
     public $created;
-
 }

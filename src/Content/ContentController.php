@@ -12,7 +12,6 @@ use Chai17\User\User;
 use Chai17\Questions\Questions;
 use Chai17\Tags\Tags;
 
-
 class ContentController implements ContainerInjectableInterface
 {
     use ContainerInjectableTrait;
@@ -32,10 +31,10 @@ class ContentController implements ContainerInjectableInterface
         $users->setDb($this->di->get("dbqb"));
         $answers->setDb($this->di->get("dbqb"));
         $page->add("content/index", [
-            "questions" => $question->findTop3("created"),
+            "questions" => $question->findTop3("created desc"),
             "answers" => $answers,
-            "tags" => $tags->findTop3("counter"),
-            "users" => $users->findTop3("counter")
+            "tags" => $tags->findTop3("counter desc"),
+            "users" => $users->findTop3("counter desc")
         ]);
 
         return $page->render([

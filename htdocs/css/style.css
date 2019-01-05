@@ -99,7 +99,7 @@ button:hover, a:hover {
 
 .grid-container {
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: 25% 25% 25% 25%;
 }
 
 .grid-container-question {

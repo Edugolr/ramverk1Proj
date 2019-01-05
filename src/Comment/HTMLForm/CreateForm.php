@@ -8,7 +8,6 @@ use Chai17\Questions\Questions as Question;
 use Chai17\Comment\Comment;
 use Chai17\Answer\Answer as Answer;
 
-
 /**
  * Form to create an item.
  */

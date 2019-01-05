@@ -140,7 +140,7 @@ class TagsController implements ContainerInjectableInterface
         $question->setDb($this->di->get("dbqb"));
         $answers = new Answer();
         $answers->setDb($this->di->get("dbqb"));
-
+        
         $page->add("tags/crud/view-questions", [
             "questions" => $question->findAllWhere("tags LIKE ?", "%$id%"),
             "answers" => $answers,

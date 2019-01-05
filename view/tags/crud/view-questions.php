@@ -43,7 +43,8 @@ $urlToRegister = url("user/create");
             <ul class="tags">
                 <?php $tags = explode(" ", $question->tags); ?>
                 <?php foreach ($tags as $tag) : ?>
-                     <li><a href=<?= url("tags/questions/{$tag}") ?> class="tag"><?= $tag ?></a></li>
+                    <?php $link=htmlentities($tag) ?>
+                     <li><a href=<?= url("tags/questions/{$link}") ?> class="tag"><?= $tag ?></a></li>
                 <?php endforeach; ?>
             </ul>
         </div>

@@ -30,26 +30,32 @@ $text = isset($text) ? $text : $content;
 
 
 
-?><div <?= classList($classes) ?>>
+?>
+<div <?= classList($classes) ?>>
 
-    <?php if (isset($header)) : ?>
-        <h4><?= $header ?></h4>
-    <?php endif; ?>
+<?php
+if (isset($header)) : ?>
+    <h4><?= $header ?></h4>
+<?php
+endif; ?>
 
-    <?php if (isset($text)) : ?>
-        <?= $text ?>
-    <?php endif; ?>
-
-    <?php if (isset($links)) :
-        renderView(__DIR__ . "/../link-list/default", [
-            "links" => $links
-        ]);
-    endif; ?>
-
-    <?php if (isset($toc)) :
-        renderView(__DIR__ . "/../toc-list/default", [
-            "toc" => $toc
-        ]);
-    endif; ?>
+<?php
+if (isset($text)) : ?>
+    <?= $text ?>
+<?php
+endif; ?>
+<?php
+if (isset($links)) :
+    renderView(__DIR__ . "/../link-list/default", [
+        "links" => $links
+    ]);
+endif; ?>
+<?php
+if (isset($toc)) :
+    renderView(__DIR__ . "/../toc-list/default", [
+        "toc" => $toc
+    ]);
+endif;
+?>
 
 </div>

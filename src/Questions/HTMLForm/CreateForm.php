@@ -66,24 +66,24 @@ class CreateForm extends FormModel
         $user->setDb($this->di->get("dbqb"));
         $questions->setDb($this->di->get("dbqb"));
         $questions->title  = $this->form->value("title");
-        $questions->tags  = $this->form->value("tags");
         $questions->userID  = $this->di->session->get("userID");
         $questions->question = $this->form->value("question");
-        $test = explode(" ", $this->form->value("tags"));
-        foreach ($test as $test) {
+        $tagArray = explode(" ", $this->form->value("tags"));
+        $tagArray = array_filter($tagArray);
+        $questions->tags = implode(" ", $tagArray);
+        foreach ($tagArray as $tagArray) {
             $tags = new Tags();
             $tags->setDb($this->di->get("dbqb"));
-            $tags->find("tag", $test);
-            if (!$tags->tag == $test) {
-                $tags->tag = $test;
+            $tags->find("tag", $tagArray);
+            if (!$tags->tag == $tagArray) {
+                $tags->tag = $tagArray;
                 $tags->counter = 1;
                 $tags->save();
             } else {
-                $tags->tag = $test;
+                $tags->tag = $tagArray;
                 $tags->counter = $tags->counter + 1;
                 $tags->save();
             }
-
         }
         $user->findById($questions->userID);
         $user->counter = $user->counter + 1;

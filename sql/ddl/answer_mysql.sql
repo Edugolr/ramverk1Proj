@@ -8,7 +8,7 @@
 
 
 -- Ensure UTF8 on the database connection
-SET NAMES utf8;
+SET NAMES utf8mb4;
 
 
 
@@ -26,4 +26,4 @@ CREATE TABLE Answer (
     `answer` TEXT NOT NULL,
     `solution` BOOLEAN DEFAULT 0,
     `created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-) ENGINE INNODB CHARACTER SET utf8 COLLATE utf8_swedish_ci;
+) ENGINE INNODB CHARACTER SET utf8mb4 COLLATE utf8mb4_swedish_ci;
