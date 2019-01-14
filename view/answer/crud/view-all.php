@@ -21,13 +21,13 @@ $urlToDelete = url("answer/delete");
 ?><h1>View all items</h1>
 
 <p>
-    <a href="<?= $urlToCreate ?>">Create</a> | 
+    <a href="<?= $urlToCreate ?>">Create</a> |
     <a href="<?= $urlToDelete ?>">Delete</a>
 </p>
 
 <?php if (!$items) : ?>
     <p>There are no items to show.</p>
-<?php
+    <?php
     return;
 endif;
 ?>

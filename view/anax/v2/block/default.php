@@ -36,13 +36,13 @@ $text = isset($text) ? $text : $content;
 <?php
 if (isset($header)) : ?>
     <h4><?= $header ?></h4>
-<?php
+    <?php
 endif; ?>
 
 <?php
 if (isset($text)) : ?>
     <?= $text ?>
-<?php
+    <?php
 endif; ?>
 <?php
 if (isset($links)) :

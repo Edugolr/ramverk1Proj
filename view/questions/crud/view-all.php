@@ -23,20 +23,20 @@ $urlToRegister = url("user/create");
 
 <div class='hr'>
     <hr>
-    <?php if ($di->session->get("user")): ?>
+    <?php if ($di->session->get("user")) : ?>
     <img class="round" alt="" src="https://www.gravatar.com/avatar/<?=md5(strtolower(trim($di->session->get("user"))));?>"/>
     <?php endif; ?>
 </div>
-<?php if (empty($di->session->get("login"))): ?>
+<?php if (empty($di->session->get("login"))) : ?>
     <p>
         <p>Du måste vara inloggad för att kunna skapa nya frågor</p>
         <a href="<?= $urlToLogin ?>">Logga in</a> |
         <a href="<?= $urlToRegister ?>">Registrera</a>
     </p>
     <hr>
-<?php else: ?>
+<?php else : ?>
     <p>
-        <button type="button" name="button" onclick="window.location.href = '<?= $urlToCreate ?>';">Ny fråga</button>
+        <button class="btn fullwidth" name="button" onclick="window.location.href = '<?= $urlToCreate ?>';">Ny fråga</button>
     </p>
 <?php endif; ?>
 <?php foreach ($questions as $question) : ?>

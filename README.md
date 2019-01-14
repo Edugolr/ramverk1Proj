@@ -4,9 +4,24 @@ ramverk1Proj
 Code and build Status
 ----------------------------------
 [![Build Status](https://travis-ci.org/Edugolr/ramverk1Proj.svg?branch=master)](https://travis-ci.org/Edugolr/ramverk1Proj)
-[![Maintainability](https://api.codeclimate.com/v1/badges/860ee7d209bda24b6d45/maintainability)](https://codeclimate.com/github/Edugolr/ramverk1Proj/maintainability)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Edugolr/ramverk1Proj/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Edugolr/ramverk1Proj/?branch=master)
 
 
 Checking out and installing
 ----------------
-Webbplatsen skall finnas på GitHub, tillsammans med en README som beskriver hur man checkar ut och installerar sin egen version.
+
+* Pull the repo from GitHub
+* Run setup.sql file (/sql/setup.sql)
+
+
+
+License
+----------------
+[![License](https://poser.pugx.org/chai17/weather/license)](https://packagist.org/packages/chai17/weather)
+
+This software carries a MIT license. See [LICENSE.txt](LICENSE.txt) for details.
+
+```
+ .  
+..:  Copyright (c) 2018 Christofer Wikman (christofer.wikman@gmail.com)
+```

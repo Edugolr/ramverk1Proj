@@ -1,6 +1,7 @@
 <?php
 
 namespace Anax\View;
+
 $filter = new \Anax\TextFilter\TextFilter;
 /**
  * View to display all books.
@@ -24,7 +25,7 @@ $urlToRegister = url("user/create");
 
 <div class='hr'>
     <hr>
-    <?php if ($di->session->get("user")): ?>
+    <?php if ($di->session->get("user")) : ?>
     <img class="round" alt="" src="https://www.gravatar.com/avatar/<?=md5(strtolower(trim($di->session->get("user"))));?>"/>
     <?php endif; ?>
 </div>

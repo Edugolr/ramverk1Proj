@@ -15,14 +15,14 @@ $tags = isset($tags) ? $tags : null;
 ?>
 <div class='hr'>
     <hr>
-    <?php if ($di->session->get("user")): ?>
+    <?php if ($di->session->get("user")) : ?>
     <img class="round" alt="" src="https://www.gravatar.com/avatar/<?=md5(strtolower(trim($di->session->get("user"))));?>"/>
     <?php endif; ?>
 </div>
 <?php
 if (!$tags) : ?>
     <p>There are no tags to show.</p>
-<?php
+    <?php
     return;
 endif;
 ?>

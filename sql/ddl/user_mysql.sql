@@ -29,3 +29,10 @@ CREATE TABLE User (
     `deleted` DATETIME,
     `active` DATETIME
 ) ENGINE INNODB CHARACTER SET utf8 COLLATE utf8_swedish_ci;
+
+INSERT INTO User (email, acronym, password, firstname, lastname)
+   VALUES
+   ('christofer.wikman@gmail.com', 'chai17', '$2y$10$LIcFyosOoNyBnqvpnK2tt.rhIySx6B/JwBhkl4WkjRJjjr4ic8l1a', 'Christofer', 'Wikman'),
+   ('robin.wikman@gmail.com', 'frisbee', '$2y$10$LIcFyosOoNyBnqvpnK2tt.rhIySx6B/JwBhkl4WkjRJjjr4ic8l1a', 'Robin', 'Wikman'),
+   ('michael.wikman@gmail.com', 'warhammern', '$2y$10$LIcFyosOoNyBnqvpnK2tt.rhIySx6B/JwBhkl4WkjRJjjr4ic8l1a', 'Michael', 'Wikman'),
+   ('jolene.wikman@gmail.com', 'jollan', '$2y$10$LIcFyosOoNyBnqvpnK2tt.rhIySx6B/JwBhkl4WkjRJjjr4ic8l1a', 'Jolene', 'Wikman');

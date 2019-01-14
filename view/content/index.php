@@ -34,7 +34,7 @@ $filter = new \Anax\TextFilter\TextFilter;
 <?php endforeach; ?>
 <h1>Populära taggar</h1>
 <ul class="tags">
-<?php foreach ($tags as $tag): ?>
+<?php foreach ($tags as $tag) : ?>
     <?php $link=htmlentities($tag->tag) ?>
     <li><a href=<?= url("tags/questions/{$link}") ?> class="tag"><?= $tag->tag ?></a></li>
 <?php endforeach; ?>
@@ -49,8 +49,7 @@ $filter = new \Anax\TextFilter\TextFilter;
         <img style="width:100%" alt="<?=$user->firstname ?>" src="https://www.gravatar.com/avatar/<?=md5(strtolower(trim($user->email)));?>"/>
         </a>
         <h1><?= $user->firstname?> <?=$user->lastname?></h1>
-        <p class="title">länk senaste inlägg</p>
-        <p>länk senaste kommentar</p>
+
         <a href="#"><i class="fa fa-dribbble"></i></a>
         <a href="#"><i class="fa fa-twitter"></i></a>
         <a href="#"><i class="fa fa-linkedin"></i></a>

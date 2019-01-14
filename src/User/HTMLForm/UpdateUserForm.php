@@ -24,11 +24,11 @@ class UpdateUserForm extends FormModel
         $this->form->create(
             [
                 "id" => __CLASS__,
-                "legend" => "Update details of the item",
+                "legend" => "Uppdatera profil",
             ],
             [
                 "id" => [
-                    "type" => "text",
+                    "type" => "hidden",
                     "validation" => ["not_empty"],
                     "readonly" => true,
                     "value" => $user->id,
@@ -48,7 +48,7 @@ class UpdateUserForm extends FormModel
 
                 "submit" => [
                     "type" => "submit",
-                    "value" => "Save",
+                    "value" => "Spara",
                     "callback" => [$this, "callbackSubmit"]
                 ],
 
